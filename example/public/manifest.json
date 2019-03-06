@@ -1,0 +1,8 @@
+{
+  "short_name": "react-modal-handler",
+  "name": "react-modal-handler",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
