@@ -17,7 +17,7 @@ yarn add react-modal-handler
 
 ## Usage
 
-1. First, create your modal component. something like:
+1. First, create your modal component. Something like:
 ```jsx
 import React, { Component } from 'react'
 
@@ -60,8 +60,8 @@ import { MyModal } from './components/MyModal'
     main: MyModal
   }}
 
-  // pass generic
-  // props
+  // pass common
+  // options
   options={{
     onClose: () => console.log('Modal Closed from modal manager!')
   }}
@@ -97,8 +97,8 @@ const openMyModal = () => modal.open(
 | ----------------- | ------------- | ------------- | ------------------------------------------------------------- |
 | animationDuration | number        | 500           | Duration of the open / close timeout (for animation purposes) |
 | onOpenClass       | string        | 'with-modal'  | Class that will be added to body when a modal is opened       |
-| onOpen            | function      | `undefined`   | Function that fires **after** the modal opens                 |
-| onClose           | function      | `undefined`   | Function that fires **after** the modal closes                |
+| onOpen            | function      | `undefined`   | Function that fires **after** the modal is opened             |
+| onClose           | function      | `undefined`   | Function that fires **after** the modal is closed             |
 
 ## License
 
