@@ -169,7 +169,7 @@ export class ModalManager extends Component {
       ...this.state.props,
       // creates controller
       controller: {
-        ...this.state.options,
+        ...this.state.modalOptions,
         isActive: this.state.modalActive,
         onClose: this.hideModal
       }
