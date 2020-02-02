@@ -62,7 +62,7 @@ export class ModalManager extends Component {
             // onOpen func
             if (typeof mergedOptions.onOpen === 'function') {
               // run optional onOpen fn
-              mergedOptions.onOpen()
+              mergedOptions.onOpen(type, props, options)
             }
           // animation time comes
           // from passed / default
