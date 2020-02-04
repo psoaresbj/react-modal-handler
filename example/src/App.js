@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-quotes */
 import React, { Component } from 'react'
 
-import { modal, ModalManager } from 'react-modal-handler';
+import { modal, ModalManager } from 'react-modal-handler'
 
 /**
  * basic modal
@@ -17,14 +19,14 @@ class DefaultModal extends Component {
      * - isActive -> bol
      * - onClose -> fn to close the modal (pass a cb if you want it)
      */
-    const { isActive, onClose } = this.props.controller;
+    const { isActive, onClose } = this.props.controller
 
     return (
       <div className={`modal-wrapper ${isActive && '--opened'}`}>
         <div className="modal-container">
           <div className="modal-content">
             Passed content: {this.props.content}
-            <button onClick={() => onClose(() => console.log('onClose callback from the modal!'))}>Close me!</button>
+            <button onClick={() => onClose(() => console.log('onClose callback from the modal component!'))}>Close me!</button>
           </div>
         </div>
       </div>
@@ -60,7 +62,7 @@ const openModal = () => modal.open(
     // on open fn
     // default: undefined
 
-    onOpen: () => console.log('Modal opened!'),
+    onOpen: () => console.log('Modal opened from the options passed in modal.open'),
 
     // on close fn
     // default: undefined
@@ -71,7 +73,7 @@ const openModal = () => modal.open(
     // in the <ModalManager />
     // check it bellow
     //
-    // onClose: () => console.log('Modal closed from the caller')
+    onClose: () => console.log('Modal closed from the options passed in modal.open')
   }
 )
 
@@ -94,7 +96,8 @@ export default class App extends Component {
             main: DefaultModal
           }}
           options={{
-            onClose: () => console.log('Modal Closed from modal manager!')
+            onClose: () => console.log('Modal Closed from modal manager!'),
+            onOpen: () => console.log('Modal Opened from modal manager!')
           }}
         />
 
