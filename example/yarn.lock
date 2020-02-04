@@ -6345,11 +6345,8 @@ react-is@^16.8.1:
   integrity sha512-PVadd+WaUDOAciICm/J1waJaSvgq+4rHE/K70j0PFqKhkTBsPv/82UGQJNXAngz1fOQLLxI6z1sEDmJDQhCTAA==
 
 "react-modal-handler@link:..":
-<<<<<<< HEAD
-  version "1.0.1"
-=======
-  version "1.0.2"
->>>>>>> Bump lodash.template from 4.4.0 to 4.5.0 in /example
+  version "0.0.0"
+  uid ""
 
 react-scripts@^1.1.4:
   version "1.1.5"
