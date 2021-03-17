@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-quotes */
-import React, { Component } from 'react'
-
-import { modal, ModalManager } from 'react-modal-handler'
+/* eslint-disable sort-keys */
+import { ModalManager, modal } from 'react-modal-handler';
+import React, { Component } from 'react';
 
 /**
  * basic modal
@@ -19,18 +19,20 @@ class DefaultModal extends Component {
      * - isActive -> bol
      * - onClose -> fn to close the modal (pass a cb if you want it)
      */
-    const { isActive, onClose } = this.props.controller
+    const { isActive, onClose } = this.props.controller;
 
     return (
       <div className={`modal-wrapper ${isActive && '--opened'}`}>
         <div className="modal-container">
           <div className="modal-content">
             Passed content: {this.props.content}
-            <button onClick={() => onClose(() => console.log('onClose callback from the modal component!'))}>Close me!</button>
+            <button onClick={() => onClose(() => console.log('onClose callback from the modal component!'))}>
+              Close me!
+            </button>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -38,58 +40,56 @@ class DefaultModal extends Component {
  * example method to
  * open a `main` modal
  */
-const openModal = () => modal.open(
-  // type
-  'main',
+const openModal = () =>
+  modal.open(
+    // type
+    'main',
 
-  // props
-  {
-    content: 'This was passed to the modal from other unrelated component...'
-  },
+    // props
+    {
+      content: 'This was passed to the modal from other unrelated component...'
+    },
 
-  // options
-  {
-    // animation duration
-    // for animation control
-    // default: 500
-    animationDuration: 700,
+    // options
+    {
+      // animation duration
+      // for animation control
+      // default: 500
+      animationDuration: 700,
 
-    // class that will
-    // be added to body
-    // default: `with-modal`
-    onOpenClass: 'with-modal-opened',
+      // class that will
+      // be added to body
+      // default: `with-modal`
+      onOpenClass: 'with-modal-opened',
 
-    // on open fn
-    // default: undefined
+      // on open fn
+      // default: undefined
 
-    onOpen: () => console.log('Modal opened from the options passed in modal.open'),
+      onOpen: () => console.log('Modal opened from the options passed in modal.open'),
 
-    // on close fn
-    // default: undefined
-    //
-    // got this commented
-    // because we are already
-    // using the general option
-    // in the <ModalManager />
-    // check it bellow
-    //
-    onClose: () => console.log('Modal closed from the options passed in modal.open')
-  }
-)
+      // on close fn
+      // default: undefined
+      //
+      // got this commented
+      // because we are already
+      // using the general option
+      // in the <ModalManager />
+      // check it bellow
+      //
+      onClose: () => console.log('Modal closed from the options passed in modal.open')
+    }
+  );
 
 /**
  * example app
  */
 export default class App extends Component {
-  render () {
+  render() {
     return (
       <div>
-
-        {
-          /*
-           * Register modals
-           */
-        }
+        {/*
+         * Register modals
+         */}
         <ModalManager
           modals={{
             // here our `main` modal
@@ -101,13 +101,11 @@ export default class App extends Component {
           }}
         />
 
-        {
-          /*
-           * Button to open modal
-           */
-        }
+        {/*
+         * Button to open modal
+         */}
         <button onClick={openModal}>openModal</button>
       </div>
-    )
+    );
   }
 }

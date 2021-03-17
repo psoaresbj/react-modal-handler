@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { ACTION, eventManager, options as defaultOptions } from '../lib'
+import { ACTION, options as defaultOptions, eventManager } from '../lib';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 export class ModalManager extends Component {
   static propTypes = {
@@ -10,10 +9,10 @@ export class ModalManager extends Component {
   };
 
   state = {
-    modals: null,
     modal: null,
     modalActive: false,
     modalOptions: null,
+    modals: null,
     onClose: null,
     onOpen: null,
     options: null,
@@ -21,22 +20,22 @@ export class ModalManager extends Component {
   };
 
   showModal = ({ type, props, options }) => {
-    const modal = this.state.modals[type]
+    const modal = this.state.modals[type];
 
     if (!modal) {
       /* eslint-disable-next-line */
       console.warn(`[react-modal-handler] ::: No modal registered as ${type}!`);
     }
 
-    const mergedOptions = Object.assign({}, this.state.options, options)
+    const mergedOptions = Object.assign({}, this.state.options, options);
 
-    this.setState({ modal, props, modalOptions: mergedOptions }, () =>
+    this.setState({ modal, modalOptions: mergedOptions, props }, () =>
       // wrapped in timeout
       // to ensure modal comp
       // mount
       setTimeout(() => {
         // add passed / default class to body
-        this.handleBodyClass(true)
+        this.handleBodyClass(true);
         // set state modalActive as true
         this.setState({ modalActive: true }, () =>
           // waits for the animation
@@ -46,29 +45,29 @@ export class ModalManager extends Component {
             // onOpen func
             if (typeof mergedOptions.onOpen === 'function') {
               // run optional onOpen fn
-              mergedOptions.onOpen(type, props, options)
+              mergedOptions.onOpen(type, props, options);
             }
 
             if (typeof this.state.onOpen === 'function') {
-              this.state.onOpen(type, props, options)
+              this.state.onOpen(type, props, options);
             }
-          // animation time comes
-          // from passed / default
-          // options
+            // animation time comes
+            // from passed / default
+            // options
           }, mergedOptions.animationDuration)
-        )
+        );
       }, 50)
-    )
+    );
   };
 
   hideModal = cb => {
     if (!this.state.modal && !this.state.ActiveModal) {
-      return
+      return;
     }
 
-    const options = this.state.modalOptions
+    const options = this.state.modalOptions;
 
-    this.handleBodyClass(false)
+    this.handleBodyClass(false);
 
     // sets state modalActive
     // as false (runs the close anim)
@@ -80,59 +79,56 @@ export class ModalManager extends Component {
         // onClose func
         if (typeof options.onClose === 'function') {
           // run optional onClose fn
-          options.onClose()
+          options.onClose();
         }
 
         if (typeof this.state.onClose === 'function') {
-          this.state.onClose()
+          this.state.onClose();
         }
 
         // resets state modal and props
-        this.setState({ modal: null, props: null },
+        this.setState(
+          { modal: null, props: null },
           // and then runs
           // cb if exists
           () => {
             if (typeof cb === 'function') {
-              cb()
+              cb();
             }
           }
-        )
+        );
       }, options.animationDuration)
-    )
+    );
   };
 
   handleBodyClass = add =>
-    document &&
-    document.body.classList[add ? 'add' : 'remove'](this.state.modalOptions.onOpenClass)
+    document && document.body.classList[add ? 'add' : 'remove'](this.state.modalOptions.onOpenClass);
 
   componentDidMount() {
-    const { modals, options } = this.props
-    const { onClose, onOpen } = options || {}
-    const mergedOptions = Object.assign({}, defaultOptions, options)
+    const { modals, options } = this.props;
+    const { onClose, onOpen } = options || {};
+    const mergedOptions = Object.assign({}, defaultOptions, options);
 
-    this.setState({ modals, onClose, onOpen, options: mergedOptions })
+    this.setState({ modals, onClose, onOpen, options: mergedOptions });
 
     // register open and close modal events
     eventManager
-      .on(ACTION.OPEN, (type, props, options) => this.showModal({ type, props, options }))
+      .on(ACTION.OPEN, (type, props, options) => this.showModal({ options, props, type }))
       .on(ACTION.CLOSE, cb => this.hideModal(cb))
-      .emit(ACTION.DID_MOUNT, this)
+      .emit(ACTION.DID_MOUNT, this);
   }
 
   componentWillUnmount() {
     // unregister events
-    eventManager
-      .off(ACTION.OPEN)
-      .off(ACTION.CLOSE)
-      .emit(ACTION.WILL_UNMOUNT)
+    eventManager.off(ACTION.OPEN).off(ACTION.CLOSE).emit(ACTION.WILL_UNMOUNT);
   }
 
   render() {
     if (!this.state.modal) {
-      return null
+      return null;
     }
 
-    const ActiveModal = this.state.modal
+    const ActiveModal = this.state.modal;
 
     const props = {
       ...this.state.props,
@@ -141,10 +137,8 @@ export class ModalManager extends Component {
         isActive: this.state.modalActive,
         onClose: this.hideModal
       }
-    }
+    };
 
-    return (
-      <ActiveModal {...props} />
-    )
+    return <ActiveModal {...props} />;
   }
 }
