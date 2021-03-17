@@ -59,7 +59,8 @@
     "rollup": "^2.39.1"
   },
   "files": [
-    "dist"
+    "dist",
+    "typings/react-modal-handler.d.ts"
   ],
   "typings": "typings/react-modal-handler.d.ts"
 }
