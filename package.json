@@ -60,5 +60,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "typings": "typings/react-modal-handler.d.ts"
 }
