@@ -1,6 +1,6 @@
-import * as React from 'react';
-
 declare module 'react-modal-handler' {
+  import * as React from 'react';
+
   function close(cb?: Function, options?: any);
   function open(type: string, props?: any, options?: any);
 
