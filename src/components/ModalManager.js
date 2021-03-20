@@ -101,8 +101,10 @@ export class ModalManager extends Component {
     );
   };
 
-  handleBodyClass = add =>
-    document && document.body.classList[add ? 'add' : 'remove'](this.state.modalOptions.onOpenClass);
+  handleBodyClass = add => {
+    document?.body?.classList[add ? 'add' : 'remove'](this.state.modalOptions.onOpenClass);
+    document?.getElementsByTagName('html')[0]?.classList[add ? 'add' : 'remove'](this.state.modalOptions.onOpenClass);
+  };
 
   componentDidMount() {
     const { modals, options } = this.props;
